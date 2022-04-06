@@ -140,7 +140,7 @@ $(window).on('load', function() {
     }
 
     let trolleyRow = new L.geoJson.ajax(
-      "geojson/northern-electric.geojson"
+      "geojson/northern-electric.geojson", { weight: 1 }
     ).addTo(map);
   
     let overlaysObj = {
