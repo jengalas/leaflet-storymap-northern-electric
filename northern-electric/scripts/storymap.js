@@ -107,17 +107,6 @@ $(window).on('load', function() {
     })       
 };
 
-let overlaysObj = {
-    '1896 MDI Map': L.tileLayer('https://mapwarper.net/maps/tile/44483/{z}/{x}/{y}.png', {
-        attribution: "Map reproduction courtesy of the Norman B. Leventhal Map & Education Center at the Boston Public Library",
-        maxZoom:16
-    }),
-    '1903 Path Map': L.tileLayer('https://geo.leventhalmap.org/maps/tile/5793/{z}/{x}/{y}.png', {
-        attribution: "Map reproduction courtesy of the Norman B. Leventhal Map & Education Center at the Boston Public Library",
-        maxZoom:16
-    })
-};
-
   function addBaseMap() {
     baseMaps['Basic Topo'].addTo(map);
   }
@@ -150,11 +139,11 @@ let overlaysObj = {
       }).addTo(map);
     }
 
-    var trolleyRow = new L.geoJson.ajax(
+    let trolleyRow = new L.geoJson.ajax(
       "geojson/northern-electric.geojson"
     ).addTo(map);
   
-    var overlaysObj = {
+    let overlaysObj = {
       "trolleyROW": trolleyRow
     };
  
