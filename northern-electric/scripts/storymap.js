@@ -152,14 +152,12 @@ let overlaysObj = {
 
     var trolleyRow = new L.geoJson.ajax(
       "geojson/northern-electric.geojson"
-    );
+    ).addTo(map);
   
     var overlaysObj = {
       "trolleyROW": trolleyRow
     };
-    
-    overlaysObj.addTo(map);  
-
+ 
     let control = L.control.layers(baseMaps, overlaysObj, {
         collapsed: true
     }).addTo(map);
