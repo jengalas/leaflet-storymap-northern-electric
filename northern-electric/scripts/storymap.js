@@ -107,12 +107,14 @@ $(window).on('load', function() {
       })       
   };
 
-  let rowGeojson = new L.GeoJSON.AJAX("geojson/northern-electric.geojson");;
+  async function addGeoJson() {
+    const response = await fetch("geojson/northern-electric.geojson");
+    const data = await response.json();
+    L.geoJson(data, {onEachFeature: onEachFeature}).addTo(map);
+  }
 
-  let overlaysObj = {
-      "Trolley Right-of-Way": L.geoJson(rowGeojson, {onEachFeature: onEachFeature}).addTo(map)
-  };
-
+  addGeoJson();
+  
   function addBaseMap() {
     baseMaps['Basic Topo'].addTo(map);
   }
@@ -145,7 +147,7 @@ $(window).on('load', function() {
       }).addTo(map);
     }
 
-    let control = L.control.layers(baseMaps, overlaysObj, {
+    let control = L.control.layers(baseMaps, {
         collapsed: true
     }).addTo(map);
 
