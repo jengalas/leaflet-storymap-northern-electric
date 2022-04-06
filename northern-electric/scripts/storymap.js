@@ -96,10 +96,6 @@ $(window).on('load', function() {
       'Aerial': L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
           attribution: 'Tiles &copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community'
       }),
-      'NatGeo': L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/NatGeo_World_Map/MapServer/tile/{z}/{y}/{x}', {
-          attribution: 'Tiles &copy; Esri &mdash; National Geographic, Esri, DeLorme, NAVTEQ, UNEP-WCMC, USGS, NASA, ESA, METI, NRCAN, GEBCO, NOAA, iPC',
-      maxZoom: 16
-      }),
       'USGS Topo': L.tileLayer('https://caltopo.s3.amazonaws.com/topo/{z}/{x}/{y}.png', {
           attribution: "USDA images from <a href='http://caltopo.com/'>CalTopo</a>", 
           minZoom: 6, 
@@ -108,14 +104,7 @@ $(window).on('load', function() {
   };
 
   function addBaseMap() {
-    baseMaps['Basic Topo'].addTo(map);
-    async function addGeoJson() {
-      const response = await fetch("geojson/northern-electric.geojson");
-      const data = await response.json();
-      L.geoJson(data).addTo(map);
-    }
-  
-    addGeoJson();
+    baseMaps['Basic Topo'].addTo(map);    
   }
 
   function initMap(options, chapters) {
@@ -138,6 +127,14 @@ $(window).on('load', function() {
 
     // Load tiles
     addBaseMap();
+
+    async function addGeoJson() {
+      const response = await fetch("geojson/northern-electric.geojson");
+      const data = await response.json();
+      L.geoJson(data).addTo(map);
+    }
+    
+    addGeoJson();
 
     // Add zoom controls if needed
     if (getSetting('_zoomControls') !== 'off') {
