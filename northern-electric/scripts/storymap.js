@@ -128,13 +128,13 @@ $(window).on('load', function() {
     // Load tiles
     addBaseMap();
 
-    async function addGeoJson() {
-      const response = await fetch("geojson/northern-electric.geojson");
-      const data = await response.json();
-      L.geoJson(data).addTo(map);
-    }
+    // async function addGeoJson() {
+    //   const response = await fetch("geojson/northern-electric.geojson");
+    //   const data = await response.json();
+    //   L.geoJson(data).addTo(map);
+    // }
     
-    addGeoJson();
+    // addGeoJson();
 
     // Add zoom controls if needed
     if (getSetting('_zoomControls') !== 'off') {
