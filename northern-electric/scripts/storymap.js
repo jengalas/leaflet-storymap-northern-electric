@@ -152,7 +152,7 @@ let overlaysObj = {
 
     let control = L.control.layers(baseMaps, overlaysObj, {
         collapsed: true
-    }).addTo(mymap);
+    }).addTo(map);
 
     // control.addOverlay(ourTrails, "Our Trails");
 
