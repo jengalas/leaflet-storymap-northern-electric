@@ -107,16 +107,15 @@ $(window).on('load', function() {
       })       
   };
 
-  async function addGeoJson() {
-    const response = await fetch("geojson/northern-electric.geojson");
-    const data = await response.json();
-    L.geoJson(data).addTo(map);
-  }
-
-  addGeoJson();
-  
   function addBaseMap() {
     baseMaps['Basic Topo'].addTo(map);
+    async function addGeoJson() {
+      const response = await fetch("geojson/northern-electric.geojson");
+      const data = await response.json();
+      L.geoJson(data).addTo(map);
+    }
+  
+    addGeoJson();
   }
 
   function initMap(options, chapters) {
