@@ -156,8 +156,9 @@ let overlaysObj = {
   
     var overlaysObj = {
       "trolleyROW": trolleyRow
-    }.addTo(map);
-  
+    };
+    
+    overlaysObj.addTo(map);  
 
     let control = L.control.layers(baseMaps, overlaysObj, {
         collapsed: true
