@@ -37,7 +37,7 @@ $(window).on('load', function() {
         })
 
       } else {
-        alert('You load data from a Google Sheet, you need to add a free Google API key')
+        alert('You load data from a Google Sheet, so you need to add a free Google API key')
       }
 
     } else {
@@ -82,11 +82,44 @@ $(window).on('load', function() {
   /**
    * Loads the basemap and adds it to the map
    */
+
+   let baseMaps = {
+    'Basic Topo': L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Topo_Map/MapServer/tile/{z}/{y}/{x}', {
+        attribution: 'Tiles &copy; Esri &mdash; Esri, DeLorme, NAVTEQ, TomTom, Intermap, iPC, USGS, FAO, NPS, NRCAN, GeoBase, Kadaster NL, Ordnance Survey, Esri Japan, METI, Esri China (Hong Kong), and the GIS User Community'
+    }),
+    'Streets': L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+    }),
+    'Esri Street Map': L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer/tile/{z}/{y}/{x}', {
+        attribution: 'Tiles &copy; Esri &mdash; Source: Esri, DeLorme, NAVTEQ, USGS, Intermap, iPC, NRCAN, Esri Japan, METI, Esri China (Hong Kong), Esri (Thailand), TomTom, 2012'
+    }),
+    'Aerial': L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
+        attribution: 'Tiles &copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community'
+    }),
+    'NatGeo': L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/NatGeo_World_Map/MapServer/tile/{z}/{y}/{x}', {
+        attribution: 'Tiles &copy; Esri &mdash; National Geographic, Esri, DeLorme, NAVTEQ, UNEP-WCMC, USGS, NASA, ESA, METI, NRCAN, GEBCO, NOAA, iPC',
+    maxZoom: 16
+    }),
+    'USGS Topo': L.tileLayer('https://caltopo.s3.amazonaws.com/topo/{z}/{x}/{y}.png', {
+        attribution: "USDA images from <a href='http://caltopo.com/'>CalTopo</a>", 
+        minZoom: 6, 
+        maxZoom:  16
+    })       
+};
+
+let overlaysObj = {
+    '1896 MDI Map': L.tileLayer('https://mapwarper.net/maps/tile/44483/{z}/{x}/{y}.png', {
+        attribution: "Map reproduction courtesy of the Norman B. Leventhal Map & Education Center at the Boston Public Library",
+        maxZoom:16
+    }),
+    '1903 Path Map': L.tileLayer('https://geo.leventhalmap.org/maps/tile/5793/{z}/{x}/{y}.png', {
+        attribution: "Map reproduction courtesy of the Norman B. Leventhal Map & Education Center at the Boston Public Library",
+        maxZoom:16
+    })
+};
+
   function addBaseMap() {
-    var basemap = trySetting('_tileProvider', 'Stamen.TonerLite');
-    L.tileLayer.provider(basemap, {
-      maxZoom: 18
-    }).addTo(map);
+    baseMaps['Basic Topo'].addTo(map);
   }
 
   function initMap(options, chapters) {
@@ -116,6 +149,12 @@ $(window).on('load', function() {
         position: getSetting('_zoomControls')
       }).addTo(map);
     }
+
+    let control = L.control.layers(baseMaps, overlaysObj, {
+        collapsed: true
+    }).addTo(mymap);
+
+    // control.addOverlay(ourTrails, "Our Trails");
 
     var markers = [];
 
