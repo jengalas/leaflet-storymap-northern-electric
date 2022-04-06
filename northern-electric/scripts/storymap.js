@@ -110,7 +110,7 @@ $(window).on('load', function() {
   async function addGeoJson() {
     const response = await fetch("geojson/northern-electric.geojson");
     const data = await response.json();
-    L.geoJson(data, {onEachFeature: onEachFeature}).addTo(map);
+    L.geoJson(data).addTo(map);
   }
 
   addGeoJson();
