@@ -144,7 +144,7 @@ $(window).on('load', function() {
     ).addTo(map);
   
     let overlaysObj = {
-      "trolleyROW": trolleyRow
+      "Trolley Route": trolleyRow
     };
  
     let control = L.control.layers(baseMaps, overlaysObj, {
@@ -270,7 +270,7 @@ $(window).on('load', function() {
         if (enableLightbox && mediaType === 'img') {
           var lightboxWrapper = $('<a></a>', {
             'data-lightbox': c['Media Link'],
-            'href': c['Media Link'],
+            'href': c['Large Image Link'],
             'data-title': c['Chapter'],
             'data-alt': c['Chapter'],
           });
