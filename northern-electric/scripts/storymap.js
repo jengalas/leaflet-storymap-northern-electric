@@ -189,7 +189,11 @@ $(window).on('load', function() {
           L.marker([lat, lon], {
             icon: L.ExtraMarkers.icon({
               icon: 'fa-number',
-              number: c['Marker'] === 'Plain' ? '' : chapterCount,
+              number: c['Marker'] === 'Numbered'
+                ? chapterCount
+                : (c['Marker'] === 'Plain'
+                  ? ''
+                  : c['Marker']), 
               markerColor: c['Marker Color'] || 'blue'
             }),
             opacity: c['Marker'] === 'Hidden' ? 0 : 0.9,
@@ -326,7 +330,7 @@ $(window).on('load', function() {
         ) {
 
           // Update URL hash
-          location.hash = i + 2;
+          location.hash = i + 1;
 
           // Remove styling for the old in-focus chapter and
           // add it to the new active chapter
@@ -477,7 +481,7 @@ $(window).on('load', function() {
 
     // On first load, check hash and if it contains an number, scroll down
     if (parseInt(location.hash.substr(1))) {
-      var containerId = parseInt( location.hash.substr(1) ) - 2;
+      var containerId = parseInt( location.hash.substr(1) ) - 1;
       $('#contents').animate({
         scrollTop: $('#container' + containerId).offset().top
       }, 2000);
